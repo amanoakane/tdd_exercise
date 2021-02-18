@@ -6,20 +6,20 @@ import factory
 
 
 class Entry(models.Model):
-    entry_text = models.CharField(max_length=50, required = True, unique = True)
+    entry_text = models.CharField(max_length=50, blank=False, unique=True)
 
 
 class Puzzle(models.Model):
-    title = models.CharField(max_length=255, blank = True)
-    date = models.DateTimeField(default=timezone.now, required = True)
-    byline = models.CharField(max_length=255, required = True)
-    publisher = models.CharField(max_length=255, required = True)
+    title = models.CharField(max_length=255, blank=True)
+    date = models.DateTimeField(default=timezone.now, blank=False)
+    byline = models.CharField(max_length=255, blank=False)
+    publisher = models.CharField(max_length=255, blank=False)
 
 
 class Clue(models.Model):
     entry = models.ForeignKey(Entry, on_delete=models.CASCADE)
     puzzle = models.ForeignKey(Puzzle, on_delete=models.CASCADE)
-    clue_text = models.CharField(max_length=512, required = True)
+    clue_text = models.CharField(max_length=512, blank=False)
     theme = models.BooleanField(default=False)
 
 
